@@ -2,7 +2,6 @@
 {
    internal class Program
    {
-      public delegate void WriteMessageFunction(string message);
       public static void WriteMessage(string message)
       {
          Console.WriteLine(message);
@@ -14,7 +13,9 @@
       private static void Main(string[] args)
       {
          var selection = Console.ReadLine();
-         WriteMessageFunction writeMessageFunction;
+
+         Action<string> writeMessageFunction;
+
          if (selection == "1")
          {
             writeMessageFunction = WriteTimlyMessage;
