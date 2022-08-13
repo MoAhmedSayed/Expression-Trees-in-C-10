@@ -2,29 +2,35 @@
 {
    internal class Program
    {
-      public static void WriteMessage(string message)
+      public static bool WriteMessage(string message)
       {
          Console.WriteLine(message);
+         return true;
       }
-      public static void WriteTimlyMessage(string message)
+      public static bool WriteTimlyMessage(string message)
       {
          Console.WriteLine(message + " " + DateTime.Now);
+         return true;
       }
       private static void Main(string[] args)
       {
          var selection = Console.ReadLine();
 
-         Action<string> writeMessageFunction;
+         Func<string, bool> func;
 
          if (selection == "1")
          {
-            writeMessageFunction = WriteTimlyMessage;
+            func = WriteTimlyMessage;
          }
          else
          {
-            writeMessageFunction = WriteMessage;
+            func = WriteMessage;
          }
-         writeMessageFunction("Hello, World!");
+         ExcuteWrite(func);
+      }
+      private static bool ExcuteWrite(Func<string, bool> func)
+      {
+         return func("Hello, World!");
       }
    }
 }
