@@ -2,16 +2,6 @@
 {
    internal class Program
    {
-      public static bool WriteMessage(string message)
-      {
-         Console.WriteLine(message);
-         return true;
-      }
-      public static bool WriteTimlyMessage(string message)
-      {
-         Console.WriteLine(message + " " + DateTime.Now);
-         return true;
-      }
       private static void Main(string[] args)
       {
          var selection = Console.ReadLine();
@@ -20,11 +10,20 @@
 
          if (selection == "1")
          {
-            func = WriteTimlyMessage;
+            func = message =>
+            {
+               Console.WriteLine(message + " " + DateTime.Now);
+               return true;
+            };
+
          }
          else
          {
-            func = WriteMessage;
+            func = message =>
+            {
+               Console.WriteLine(message);
+               return true;
+            };
          }
          ExcuteWrite(func);
       }
