@@ -4,32 +4,18 @@
    {
       private static void Main(string[] args)
       {
-         var selection = Console.ReadLine();
+         var guiters = new List<Guitar>();
+         guiters.Add(new Guitar(PickupType.Electric, StringType.Steel, "Cherry Red Strat"));
+         guiters.Add(new Guitar(PickupType.AcousticElectric, StringType.Nylon, "Takmine EG-116"));
+         guiters.Add(new Guitar(PickupType.Acoustic, StringType.Steel, "Martin D-X1E"));
 
-         Func<string, bool> func;
+         Func<Guitar, bool> nylon = guitar => guitar.Strings == StringType.Nylon;
 
-         if (selection == "1")
+         var nylonGuitars = guiters.Where(nylon);
+         foreach (var guitar in nylonGuitars)
          {
-            func = message =>
-            {
-               Console.WriteLine(message + " " + DateTime.Now);
-               return true;
-            };
-
+            Console.WriteLine(guitar.Name);
          }
-         else
-         {
-            func = message =>
-            {
-               Console.WriteLine(message);
-               return true;
-            };
-         }
-         ExcuteWrite(func);
-      }
-      private static bool ExcuteWrite(Func<string, bool> func)
-      {
-         return func("Hello, World!");
       }
    }
 }
